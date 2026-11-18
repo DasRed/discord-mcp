@@ -1,0 +1,98 @@
+{
+    "name": "@dasred/discord-mcp",
+    "version": "0.0.0",
+    "description": "Streamable HTTP MCP server for Discord (servers, channels, messages) using a Discord user session, packaged as a Docker image",
+    "type": "module",
+    "author": "Marco Starker",
+    "license": "MIT",
+    "private": true,
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com",
+        "access": "restricted"
+    },
+    "bugs": {
+        "url": "https://github.com/dasred/discord-mcp/issues"
+    },
+    "homepage": "https://github.com/dasred/discord-mcp",
+    "engines": {
+        "node": ">=26.12.1",
+        "npm": ">=11.20.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dasred/discord-mcp.git"
+    },
+    "files": [
+        "dist/*"
+    ],
+    "scripts": {
+        "build": "tsc && tsc-alias",
+        "test": "vitest run",
+        "coverage": "vitest run --coverage --reporter=default --reporter=junit --outputFile.junit=coverage/reports/unittest.xml",
+        "publish:check": "semantic-release --branch main --no-ci --dry-run",
+        "prepublishOnly": "npm run semantic-release",
+        "semantic-release": "semantic-release",
+        "start": "node ./dist/index.js",
+        "dev": "tsx watch ./src/index.ts",
+        "preview": "node --watch-path=./dist ./dist/index.js"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.32.2",
+        "dotenv": "^18.0.10",
+        "fastify": "^5.12.8",
+        "luxon": "^3.7.2",
+        "playwright": "^1.65.1",
+        "zod": "^4.6.7"
+    },
+    "release": {
+        "plugins": [
+            "@semantic-release/commit-analyzer",
+            "@semantic-release/release-notes-generator",
+            [
+                "@semantic-release/changelog",
+                {
+                    "changelogFile": "CHANGELOG.md"
+                }
+            ],
+            [
+                "@semantic-release/npm",
+                {
+                    "npmPublish": false
+                }
+            ],
+            [
+                "@semantic-release/git",
+                {
+                    "assets": [
+                        "package.json",
+                        "package-lock.json",
+                        "CHANGELOG.md"
+                    ],
+                    "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+                }
+            ],
+            [
+                "@semantic-release/github",
+                {
+                    "failComment": false
+                }
+            ]
+        ]
+    },
+    "devDependencies": {
+        "@semantic-release/changelog": "^7.0.0",
+        "@semantic-release/commit-analyzer": "^13.0.1",
+        "@semantic-release/git": "^11.0.1",
+        "@semantic-release/github": "^12.0.11",
+        "@semantic-release/npm": "^13.2.0",
+        "@semantic-release/release-notes-generator": "^14.1.1",
+        "@types/luxon": "^3.7.6",
+        "@types/node": "^26.6.6",
+        "@vitest/coverage-v8": "^5.1.1",
+        "semantic-release": "^25.0.9",
+        "tsc-alias": "^1.9.10",
+        "tsx": "^4.23.15",
+        "typescript": "^7.0.2",
+        "vitest": "^5.1.1"
+    }
+}
