@@ -2,6 +2,7 @@ import config from '@/config';
 import discordAPIClient from '@/lib/discordAPIClient';
 import MCPServerFactory from '@/service/mcp/MCPServerFactory';
 import MCPToolGetChannels from '@/service/mcp/MCPToolGetChannels';
+import MCPToolGetDirectMessages from '@/service/mcp/MCPToolGetDirectMessages';
 import MCPToolGetServers from '@/service/mcp/MCPToolGetServers';
 import MCPToolReadMessages from '@/service/mcp/MCPToolReadMessages';
 import MCPToolSendMessage from '@/service/mcp/MCPToolSendMessage';
@@ -15,6 +16,7 @@ const mcpServerFactory = new MCPServerFactory({
     tools:    [
         new MCPToolGetServers(discordAPIClient),
         new MCPToolGetChannels(discordAPIClient),
+        new MCPToolGetDirectMessages(discordAPIClient),
         new MCPToolReadMessages(discordAPIClient),
         new MCPToolSendMessage(discordAPIClient),
     ],

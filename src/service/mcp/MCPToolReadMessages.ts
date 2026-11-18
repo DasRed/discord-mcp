@@ -7,12 +7,12 @@ const PAGE_SIZE = 100;
 
 export default class MCPToolReadMessages extends MCPTool {
     get description(): string {
-        return 'Read the most recent messages of a channel, newest first, optionally limited to the last hours';
+        return 'Read the most recent messages of a channel or direct message channel, newest first, optionally limited to the last hours';
     }
 
     get inputSchema(): Record<string, ZodType> {
         return {
-            channel_id:   z.string().regex(/^\d+$/).describe('ID of the channel, see get_channels'),
+            channel_id:   z.string().regex(/^\d+$/).describe('ID of the channel or direct message channel, see get_channels or get_direct_messages'),
             hours_back:   z.number().positive().optional().describe('Only messages of the last hours'),
             max_messages: z.number().int().min(1).max(500).describe('Maximum number of messages to return'),
         };

@@ -5,6 +5,7 @@ import type DiscordAPIErrorInterface from '@/model/api/DiscordAPIErrorInterface'
 import type DiscordAPIGuildInterface from '@/model/api/DiscordAPIGuildInterface';
 import type DiscordAPIMessageInterface from '@/model/api/DiscordAPIMessageInterface';
 import type DiscordChannelModelInterface from '@/model/DiscordChannelModelInterface';
+import type DiscordDirectChannelModelInterface from '@/model/DiscordDirectChannelModelInterface';
 import type DiscordGuildModelInterface from '@/model/DiscordGuildModelInterface';
 import type DiscordMessageModelInterface from '@/model/DiscordMessageModelInterface';
 import DiscordModelConverter from '@/service/DiscordModelConverter';
@@ -79,6 +80,13 @@ export default class DiscordAPIClient {
         const messages = await this.fetch<DiscordAPIMessageInterface[]>(DiscordHTTPMethodEnum.GET, `/channels/${encodeURIComponent(channelId)}/messages?${query.toString()}`);
 
         return messages.map((message) => DiscordModelConverter.toMessage(message));
+    }
+
+    async getDirectChannels(): Promise<DiscordDirectChannelModelInterface[]> {
+        const channels = await this.fetch<DiscordAPIChannelInterface[]>(DiscordHTTPMethodEnum.GET, '/users/@me/channels');
+
+        return channels.map((channel) => DiscordModelConverter.toDirectChannel(channel))
+                       .sort((a, b) => (b.lastMessageAt?.getTime() ?? 0) - (a.lastMessageAt?.getTime() ?? 0));
     }
 
     async getGuildChannels(guildId: string): Promise<DiscordChannelModelInterface[]> {

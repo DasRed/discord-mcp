@@ -13,12 +13,12 @@ const PART_DELAY = 500;
 
 export default class MCPToolSendMessage extends MCPTool {
     get description(): string {
-        return 'Send a message to a channel as the Discord account; messages longer than 2000 characters are split';
+        return 'Send a message to a channel or direct message channel as the Discord account; messages longer than 2000 characters are split';
     }
 
     get inputSchema(): Record<string, ZodType> {
         return {
-            channel_id: z.string().regex(/^\d+$/).describe('ID of the channel, see get_channels'),
+            channel_id: z.string().regex(/^\d+$/).describe('ID of the channel or direct message channel, see get_channels or get_direct_messages'),
             content:    z.string().min(1).describe('Message text, Discord markdown is supported'),
         };
     }

@@ -45,6 +45,17 @@ describe('DiscordAPIClient', () => {
         expect(fetchMock.mock.calls[1][0]).toBe('https://discord.test/api/v9/channels/10/messages?limit=20&before=99');
     });
 
+    it('lists direct message channels by last activity', async () => {
+        fetchMock.mockResolvedValueOnce(json(200, [
+            {id: 'old', last_message_id: '175928847299117063', recipients: [{id: '7', username: 'a'}], type: 1},
+            {id: 'empty', recipients: [{id: '8', username: 'b'}], type: 1},
+            {id: 'new', last_message_id: '1300000000000000000', recipients: [{id: '9', username: 'c'}], type: 1},
+        ]));
+
+        expect((await client.getDirectChannels()).map((channel) => channel.id)).toEqual(['new', 'old', 'empty']);
+        expect(fetchMock.mock.calls[0][0]).toBe('https://discord.test/api/v9/users/@me/channels');
+    });
+
     it('posts messages with a JSON body', async () => {
         fetchMock.mockResolvedValueOnce(json(200, {attachments: [], author: {id: '7', username: 'marco'}, channel_id: '10', content: 'hi', edited_timestamp: null, id: '100', timestamp: '2026-11-18T10:00:00Z'}));
 

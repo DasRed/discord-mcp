@@ -1,12 +1,13 @@
 # discord-mcp
 
-Streamable HTTP [MCP](https://modelcontextprotocol.io) server for Discord, shipped as a Docker image. It lets an AI assistant list your servers and channels, read messages and (optionally) send messages as your Discord account.
+Streamable HTTP [MCP](https://modelcontextprotocol.io) server for Discord, shipped as a Docker image. It lets an AI assistant list your servers, channels and direct messages, read messages and (optionally) send messages as your Discord account.
 
 The tool set follows [elyxlz/discord-mcp](https://github.com/elyxlz/discord-mcp) (Python, stdio). This implementation shares no code with it and works differently:
 
 - **Login with a real browser, data via the API**: Playwright (headless Chromium) is only used to log in. It captures the session token the Discord web app uses and closes the browser again. Servers, channels and messages are then read through the same HTTP API the web app uses, instead of scraping the page.
 - **Persistent session**: the browser session and the token are stored in the data directory, so a restart needs no new login.
 - **Two-factor authentication** via TOTP secret.
+- **Direct messages**: `get_direct_messages` lists DMs and group DMs; their channel IDs work with `read_messages` and `send_message`.
 - **Read-only by default**: `send_message` is only available with `DISCORD_MCP_READ_ONLY=false`.
 - **Optional bearer token** for the MCP endpoint and a **health check** at `/healthz`.
 
@@ -49,7 +50,8 @@ The MCP endpoint is `http://<host>:3000/mcp` (stateless Streamable HTTP, `POST` 
 |-----------------|---------------------------------------------------|------------------------------------------------------------------------------------|
 | `get_servers`   | –                                                 | List all servers (guilds) of the account                                           |
 | `get_channels`  | `server_id`                                       | List the channels of a server, sorted by position, including categories and threads |
-| `read_messages` | `channel_id`, `max_messages` (1–500), `hours_back?` | Read the newest messages of a channel, newest first                               |
+| `get_direct_messages` | –                                           | List direct message and group DM channels, most recent activity first             |
+| `read_messages` | `channel_id`, `max_messages` (1–500), `hours_back?` | Read the newest messages of a channel or direct message channel, newest first      |
 | `send_message`  | `channel_id`, `content`                           | Send a message, content longer than 2000 characters is split (write mode only)     |
 
 Example request:

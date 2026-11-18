@@ -58,7 +58,7 @@ describe('route mcp', () => {
         const names = (list.result.tools as {name: string}[]).map((tool) => tool.name);
         const call  = await rpc('tools/call', {arguments: {}, name: 'get_servers'});
 
-        expect(names).toEqual(['get_servers', 'get_channels', 'read_messages', 'send_message']);
+        expect(names).toEqual(['get_servers', 'get_channels', 'get_direct_messages', 'read_messages', 'send_message']);
         expect(JSON.parse((call.result.content as {text: string}[])[0].text)).toEqual([{iconURL: null, id: '1', name: 'Guild', owner: false}]);
     });
 });

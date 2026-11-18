@@ -48,4 +48,28 @@ describe('DiscordModelConverter', () => {
             timestamp:   new Date('2026-11-18T10:00:00.000Z'),
         });
     });
+
+    it('converts snowflakes to dates', () => {
+        // example snowflake of the Discord API documentation
+        expect(DiscordModelConverter.snowflakeToDate('175928847299117063').toISOString()).toBe('2016-04-30T11:18:25.796Z');
+    });
+
+    it('converts direct message channels', () => {
+        const channel = DiscordModelConverter.toDirectChannel({
+            id:              '20',
+            last_message_id: '175928847299117063',
+            recipients:      [{global_name: 'Felix', id: '7', username: 'felix'}, {id: '8', username: 'niklas'}],
+            type:            3,
+        });
+
+        expect(channel).toEqual({
+            id:            '20',
+            lastMessageAt: new Date('2016-04-30T11:18:25.796Z'),
+            name:          'Felix, niklas',
+            recipients:    [{id: '7', name: 'Felix', username: 'felix'}, {id: '8', name: 'niklas', username: 'niklas'}],
+            type:          DiscordChannelTypeEnum.GROUP_DM,
+        });
+        expect(DiscordModelConverter.toDirectChannel({id: '21', name: 'Team', type: 3}).name).toBe('Team');
+        expect(DiscordModelConverter.toDirectChannel({id: '22', type: 1}).lastMessageAt).toBeNull();
+    });
 });

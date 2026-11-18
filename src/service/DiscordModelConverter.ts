@@ -2,9 +2,15 @@ import DiscordChannelTypeEnum from '@/enum/DiscordChannelTypeEnum';
 import type DiscordAPIChannelInterface from '@/model/api/DiscordAPIChannelInterface';
 import type DiscordAPIGuildInterface from '@/model/api/DiscordAPIGuildInterface';
 import type DiscordAPIMessageInterface from '@/model/api/DiscordAPIMessageInterface';
+import type DiscordAPIUserInterface from '@/model/api/DiscordAPIUserInterface';
 import type DiscordChannelModelInterface from '@/model/DiscordChannelModelInterface';
+import type DiscordDirectChannelModelInterface from '@/model/DiscordDirectChannelModelInterface';
 import type DiscordGuildModelInterface from '@/model/DiscordGuildModelInterface';
 import type DiscordMessageModelInterface from '@/model/DiscordMessageModelInterface';
+import type DiscordUserModelInterface from '@/model/DiscordUserModelInterface';
+
+// Discord snowflakes count milliseconds since 2015-01-01
+const DISCORD_EPOCH = 1420070400000n;
 
 const CHANNEL_TYPES: Record<number, DiscordChannelTypeEnum> = {
     0:  DiscordChannelTypeEnum.TEXT,
@@ -23,6 +29,10 @@ const CHANNEL_TYPES: Record<number, DiscordChannelTypeEnum> = {
 };
 
 export default class DiscordModelConverter {
+    static snowflakeToDate(snowflake: string): Date {
+        return new Date(Number((BigInt(snowflake) >> 22n) + DISCORD_EPOCH));
+    }
+
     static toChannel(channel: DiscordAPIChannelInterface): DiscordChannelModelInterface {
         return {
             guildId:  channel.guild_id ?? null,
@@ -32,6 +42,18 @@ export default class DiscordModelConverter {
             position: channel.position ?? 0,
             topic:    channel.topic ?? null,
             type:     CHANNEL_TYPES[channel.type] ?? DiscordChannelTypeEnum.UNKNOWN,
+        };
+    }
+
+    static toDirectChannel(channel: DiscordAPIChannelInterface): DiscordDirectChannelModelInterface {
+        const recipients = (channel.recipients ?? []).map((user) => DiscordModelConverter.toUser(user));
+
+        return {
+            id:            channel.id,
+            lastMessageAt: channel.last_message_id != null ? DiscordModelConverter.snowflakeToDate(channel.last_message_id) : null,
+            name:          channel.name ?? recipients.map((user) => user.name).join(', '),
+            recipients:    recipients,
+            type:          CHANNEL_TYPES[channel.type] ?? DiscordChannelTypeEnum.UNKNOWN,
         };
     }
 
@@ -48,12 +70,20 @@ export default class DiscordModelConverter {
         return {
             attachments: message.attachments.map((attachment) => attachment.url),
             authorId:    message.author.id,
-            authorName:  message.author.global_name ?? message.author.username,
+            authorName:  DiscordModelConverter.toUser(message.author).name,
             channelId:   message.channel_id,
             content:     message.content,
             editedAt:    message.edited_timestamp !== null ? new Date(message.edited_timestamp) : null,
             id:          message.id,
             timestamp:   new Date(message.timestamp),
+        };
+    }
+
+    static toUser(user: DiscordAPIUserInterface): DiscordUserModelInterface {
+        return {
+            id:       user.id,
+            name:     user.global_name ?? user.username,
+            username: user.username,
         };
     }
 }
