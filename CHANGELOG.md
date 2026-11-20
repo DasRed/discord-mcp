@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/dasred/discord-mcp/compare/v1.1.0...v1.1.1) (2026-11-20)
+
+
+### Bug Fixes
+
+* update github workflows ([f889c61](https://github.com/dasred/discord-mcp/commit/f889c61f13b42cbdae88b644d6769a2b41a62260))
+
 # [1.1.0](https://github.com/dasred/discord-mcp/compare/v1.0.0...v1.1.0) (2026-11-18)
 
 
