@@ -1,5 +1,7 @@
 FROM node:26-trixie-slim
 
+LABEL io.modelcontextprotocol.server.name="io.github.DasRed/discord-mcp"
+
 ENV NODE_ENV=production
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 ENV DISCORD_MCP_SERVER_HOST=0.0.0.0

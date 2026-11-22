@@ -1,0 +1,104 @@
+{
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "io.github.DasRed/discord-mcp",
+    "title": "Discord",
+    "description": "Read Discord servers, channels and direct messages of your account, optionally send messages.",
+    "version": "1.1.1",
+    "websiteUrl": "https://www.marco-starker.de/en/projects/discord-mcp/docs",
+    "repository": {
+        "id": "1463068801",
+        "source": "github",
+        "url": "https://github.com/DasRed/discord-mcp"
+    },
+    "packages": [
+        {
+            "registryType": "oci",
+            "identifier": "ghcr.io/dasred/discord-mcp:1.1.1",
+            "runtimeHint": "docker",
+            "runtimeArguments": [
+                {
+                    "type": "named",
+                    "name": "-p",
+                    "description": "Port mapping host:container. The URL below assumes host port 3000.",
+                    "default": "3000:3000",
+                    "isRequired": true
+                },
+                {
+                    "type": "named",
+                    "name": "-v",
+                    "description": "Volume for the stored Discord session, otherwise every start needs a new login",
+                    "default": "discord-mcp-data:/var/www/data",
+                    "isRequired": true
+                },
+                {
+                    "type": "named",
+                    "name": "--shm-size",
+                    "description": "Shared memory for Chromium during the login",
+                    "default": "256m"
+                }
+            ],
+            "transport": {
+                "type": "streamable-http",
+                "url": "http://localhost:3000/mcp",
+                "headers": [
+                    {
+                        "name": "Authorization",
+                        "description": "\"Bearer <token>\", only needed when DISCORD_MCP_AUTH_TOKEN is set",
+                        "isRequired": false,
+                        "isSecret": true
+                    }
+                ]
+            },
+            "environmentVariables": [
+                {
+                    "name": "DISCORD_MCP_DISCORD_EMAIL",
+                    "description": "Email of the Discord account, not needed with DISCORD_MCP_DISCORD_TOKEN"
+                },
+                {
+                    "name": "DISCORD_MCP_DISCORD_PASSWORD",
+                    "description": "Password of the Discord account",
+                    "isSecret": true
+                },
+                {
+                    "name": "DISCORD_MCP_DISCORD_TOTP_SECRET",
+                    "description": "Base32 secret of the authenticator app for two-factor authentication",
+                    "isSecret": true
+                },
+                {
+                    "name": "DISCORD_MCP_DISCORD_TOKEN",
+                    "description": "Session token, skips the browser login",
+                    "isSecret": true
+                },
+                {
+                    "name": "DISCORD_MCP_READ_ONLY",
+                    "description": "Only expose read-only tools, false adds send_message",
+                    "format": "boolean",
+                    "default": "true",
+                    "choices": [
+                        "true",
+                        "false"
+                    ]
+                },
+                {
+                    "name": "DISCORD_MCP_AUTH_TOKEN",
+                    "description": "If set, the MCP endpoint requires Authorization: Bearer <token>",
+                    "isSecret": true
+                },
+                {
+                    "name": "DISCORD_MCP_SERVER_LOG_LEVEL",
+                    "description": "Log level",
+                    "default": "info",
+                    "choices": [
+                        "fatal",
+                        "error",
+                        "warn",
+                        "info",
+                        "debug",
+                        "trace",
+                        "silent"
+                    ]
+                }
+            ]
+        }
+    ]
+}
