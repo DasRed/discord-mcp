@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/dasred/discord-mcp/compare/v1.1.1...v1.2.0) (2026-11-22)
+
+
+### Features
+
+* deploy to registry.modelcontextprotocol.io ([c0c9b67](https://github.com/dasred/discord-mcp/commit/c0c9b67fe026d04dc832ff5eac72d0c74396a82a))
+
 ## [1.1.1](https://github.com/dasred/discord-mcp/compare/v1.1.0...v1.1.1) (2026-11-20)
 
 
