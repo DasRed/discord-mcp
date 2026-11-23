@@ -1,6 +1,6 @@
 ---
 title: Configuration
-description: All environment variables of discord-mcp with defaults, plus login via password, TOTP or session token.
+description: All environment variables of discord-mcp with their defaults, plus logging in with password, two-factor (TOTP) or session token and what helps with a captcha.
 order: 20
 slug: configuration
 section: Setup

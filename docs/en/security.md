@@ -1,6 +1,6 @@
 ---
 title: Security
-description: What discord-mcp may do with your Discord account, where credentials are stored and how to protect the endpoint.
+description: What discord-mcp may do with your Discord account, what the Terms of Service say about it, where credentials are stored and how to protect the endpoint.
 order: 50
 slug: security
 section: Reference

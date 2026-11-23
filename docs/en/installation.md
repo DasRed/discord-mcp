@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: Run discord-mcp as a Docker container with a data volume for the Discord session.
+description: Run discord-mcp as a Docker container with a data volume for the Discord session, using docker run or Compose, with ports, endpoints and local development.
 order: 10
 slug: installation
 section: Setup

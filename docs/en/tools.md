@@ -1,6 +1,6 @@
 ---
 title: Tools
-description: Reference of all discord-mcp tools with parameters, return values and examples.
+description: Reference of all discord-mcp tools to read servers, channels and direct messages and to send messages, with parameters, return values and examples.
 order: 40
 slug: tools
 section: Reference

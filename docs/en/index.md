@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: discord-mcp exposes your Discord account as a remote MCP server for Claude – servers, channels, direct messages.
+description: discord-mcp exposes your Discord account as a remote MCP server for Claude, with access to servers, channels and direct messages. How it works and its status.
 order: 0
 section: Getting started
 ---

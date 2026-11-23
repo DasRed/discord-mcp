@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: discord-mcp als Docker-Container mit Datenvolume für die Discord-Session starten.
+description: discord-mcp als Docker-Container mit Datenvolume für die Discord-Session starten, per docker run oder Compose, mit Ports, Endpunkten und lokaler Entwicklung.
 order: 10
 slug: installation
 section: Einrichtung

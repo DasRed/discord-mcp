@@ -1,6 +1,6 @@
 ---
 title: Tools
-description: Referenz aller Tools von discord-mcp mit Parametern, Rückgabe und Beispielen.
+description: Referenz aller Tools von discord-mcp, um Server, Kanäle und Direktnachrichten zu lesen und Nachrichten zu senden, mit Parametern, Rückgabe und Beispielen.
 order: 40
 slug: tools
 section: Referenz

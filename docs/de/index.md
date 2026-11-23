@@ -1,6 +1,6 @@
 ---
 title: Überblick
-description: discord-mcp macht dein Discord-Konto als Remote-MCP-Server für Claude nutzbar – Server, Kanäle, Direktnachrichten.
+description: discord-mcp macht dein Discord-Konto als Remote-MCP-Server für Claude nutzbar, mit Zugriff auf Server, Kanäle und Direktnachrichten. Wie das funktioniert.
 order: 0
 section: Einstieg
 ---

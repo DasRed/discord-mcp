@@ -1,6 +1,6 @@
 ---
 title: Sicherheit
-description: Was discord-mcp mit deinem Discord-Konto darf, wo Zugangsdaten liegen und wie du den Endpunkt absicherst.
+description: Was discord-mcp mit deinem Discord-Konto darf, was die Nutzungsbedingungen dazu sagen, wo Zugangsdaten liegen und wie du den Endpunkt absicherst.
 order: 50
 slug: sicherheit
 section: Referenz

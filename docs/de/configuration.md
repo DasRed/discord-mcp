@@ -1,6 +1,6 @@
 ---
 title: Konfiguration
-description: Alle Umgebungsvariablen von discord-mcp mit Standardwerten sowie Login per Passwort, TOTP oder Session-Token.
+description: Alle Umgebungsvariablen von discord-mcp mit Standardwerten, dazu der Login per Passwort, Zwei-Faktor (TOTP) oder Session-Token und was bei Captcha hilft.
 order: 20
 slug: konfiguration
 section: Einrichtung
