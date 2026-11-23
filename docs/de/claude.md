@@ -1,6 +1,6 @@
 ---
 title: In Claude einbinden
-description: discord-mcp als Custom Connector, in Claude Code oder per JSON in anderen MCP-Clients in Claude einbinden, mit Verbindungstest und Fehlersuche.
+description: discord-mcp als Custom Connector in Claude (Web, Desktop, Mobile) oder als Remote-MCP-Server in Claude Code einbinden, die Verbindung testen und Fehler finden.
 order: 30
 slug: claude
 section: Einrichtung
@@ -36,51 +36,7 @@ claude mcp add --transport http discord https://discord.mcp.example.com/mcp \
 
 Dafür muss `DISCORD_MCP_AUTH_TOKEN` am Server gesetzt sein.
 
-## Andere MCP-Clients (JSON-Konfiguration)
-
-Viele MCP-Clients werden über einen JSON-Eintrag unter `mcpServers` konfiguriert, z. B. die `.mcp.json` von Claude Code oder Clients mit eigener Weboberfläche. Für discord-mcp sieht der Eintrag so aus:
-
-```json
-{
-  "mcpServers": {
-    "discord": {
-      "type": "http",
-      "url": "https://discord.mcp.example.com/mcp",
-      "headers": {
-        "Authorization": "Bearer dein-mcp-auth-token"
-      }
-    }
-  }
-}
-```
-
-- `type` heißt je nach Client `http` oder `streamable-http`.
-- `headers` lässt du weg, wenn `DISCORD_MCP_AUTH_TOKEN` auf dem Server nicht gesetzt ist.
-- Solche Clients verbinden sich von deinem Rechner aus. Hier reicht deshalb auch eine Adresse im Heimnetz, z. B. `http://192.168.1.10:3000/mcp`.
-
-Clients, die nur lokale Server per stdio starten (z. B. die `claude_desktop_config.json` von Claude Desktop), bindest du über [mcp-remote](https://www.npmjs.com/package/mcp-remote) an:
-
-```json
-{
-  "mcpServers": {
-    "discord": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote",
-        "https://discord.mcp.example.com/mcp",
-        "--header",
-        "Authorization:${AUTH_HEADER}"
-      ],
-      "env": {
-        "AUTH_HEADER": "Bearer dein-mcp-auth-token"
-      }
-    }
-  }
-}
-```
-
-Der Token steht in `env`, weil manche Clients Leerzeichen in `args` nicht sauber übergeben. Für eine `http://`-Adresse außerhalb von `localhost` braucht mcp-remote zusätzlich `--allow-http`.
+Für andere MCP-Clients mit JSON-Konfiguration siehe [Andere MCP-Clients](clients.md).
 
 ## Testen
 
