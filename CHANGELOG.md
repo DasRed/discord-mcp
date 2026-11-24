@@ -1,3 +1,9 @@
+## [1.2.2](https://github.com/dasred/discord-mcp/compare/v1.2.1...v1.2.2) (2026-11-24)
+
+### Bug Fixes
+
+* homepage fixed ([6f71849](https://github.com/dasred/discord-mcp/commit/6f71849247bbf0a7605e402fb89e66a3c3f87f0b))
+
 ## [1.2.1](https://github.com/dasred/discord-mcp/compare/v1.2.0...v1.2.1) (2026-11-24)
 
 ### Bug Fixes
