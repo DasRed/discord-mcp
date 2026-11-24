@@ -1,6 +1,6 @@
 {
     "name": "@dasred/discord-mcp",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Streamable HTTP MCP server for Discord (servers, channels, messages) using a Discord user session, packaged as a Docker image",
     "type": "module",
     "author": "Marco Starker",

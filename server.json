@@ -3,7 +3,7 @@
     "name": "io.github.DasRed/discord-mcp",
     "title": "Discord",
     "description": "Read Discord servers, channels and direct messages of your account, optionally send messages.",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "websiteUrl": "https://www.marco-starker.de/en/projects/discord-mcp/docs",
     "repository": {
         "id": "1463068801",
@@ -13,7 +13,7 @@
     "packages": [
         {
             "registryType": "oci",
-            "identifier": "ghcr.io/dasred/discord-mcp:1.2.0",
+            "identifier": "ghcr.io/dasred/discord-mcp:1.2.1",
             "runtimeHint": "docker",
             "runtimeArguments": [
                 {
