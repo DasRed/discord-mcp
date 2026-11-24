@@ -6,14 +6,10 @@
     "author": "Marco Starker",
     "license": "MIT",
     "private": true,
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com",
-        "access": "restricted"
-    },
     "bugs": {
         "url": "https://github.com/dasred/discord-mcp/issues"
     },
-    "homepage": "https://github.com/dasred/discord-mcp",
+    "homepage": "https://www.marco-starker.de/en/projects/discord-mcp/docs",
     "engines": {
         "node": ">=26.12.1",
         "npm": ">=11.20.0"
